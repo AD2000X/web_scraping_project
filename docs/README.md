@@ -1,4 +1,4 @@
-# Comprehensive Web Scraping Project
+# Web Scraping Project with crawl4ai
 
 A production-ready web scraping system that demonstrates mastery of all web scraping fundamentals including HTTP protocol handling, dynamic content processing, anti-scraping countermeasures, and advanced data extraction strategies.
 
@@ -15,21 +15,18 @@ A production-ready web scraping system that demonstrates mastery of all web scra
 ## 📁 Project Structure
 
 ```
-web-scraping-project/
-├── main.py                      # Main execution script
-├── requirements.txt             # Python dependencies
-├── config.py                    # Configuration settings
-├── models.py                    # Data models and structures
-├── http_handler.py              # HTTP protocol management
-├── selector_intelligence.py     # CSS selector generation
-├── dynamic_content_handler.py   # JavaScript and SPA handling
-├── anti_scraping_handler.py     # Anti-scraping countermeasures
-├── intelligent_extractor.py     # Advanced data extraction
-├── error_handler.py             # Error handling and retry logic
-├── utils.py                     # Content processing utilities
-├── news_intelligence_system.py  # Main system integration
-├── demo_functions.py            # Demonstration functions
-└── README.md                    # Project documentation
+web_scraping_project/
+├── src/                           
+├── examples/
+│   ├── main.py
+│   ├── simple_news_system.py
+│   └── demo_functions.py
+├── docs/
+├── requirements.txt
+├── LICENSE
+├── .gitignore
+├── unicode_fix_config.py
+└── README.md           
 ```
 
 ## 🛠️ Installation
