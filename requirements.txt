@@ -1,4 +1,5 @@
 # Web Scraping Project Dependencies
+
 # Core scraping framework
 crawl4ai>=0.6.3
 
@@ -6,13 +7,15 @@ crawl4ai>=0.6.3
 aiohttp>=3.8.0
 nest-asyncio>=1.5.0
 
-# Browser automation (installed with crawl4ai but explicit for clarity)
+# Browser automation (for enhanced scraping if needed)
 playwright>=1.40.0
 
-# Optional: Enhanced functionality
-requests>=2.31.0
-lxml>=4.9.0
+# HTML parsing and text processing
 beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Optional: Additional HTTP client
+requests>=2.31.0
 
 # Development and testing (optional)
 pytest>=7.0.0
