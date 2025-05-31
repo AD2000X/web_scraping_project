@@ -1,23 +1,40 @@
-# Web Scraping Project Dependencies
+# Web Scraping Project Dependencies - Fixed Version
 
-# Core scraping framework
+# Core scraping framework (latest stable version)
 crawl4ai>=0.6.3
 
 # HTTP and async support  
 aiohttp>=3.8.0
-nest-asyncio>=1.5.0
+httpx>=0.24.0
 
-# Browser automation (for enhanced scraping if needed)
+# Async utilities
+nest-asyncio>=1.5.0
+asyncio
+
+# Web automation (required for Crawl4AI)
 playwright>=1.40.0
 
 # HTML parsing and text processing
 beautifulsoup4>=4.12.0
 lxml>=4.9.0
+html5lib>=1.1
 
-# Optional: Additional HTTP client
+# Data handling
+pandas>=1.5.0
+numpy>=1.21.0
+
+# Utility libraries
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+
+# HTTP client (alternative)
 requests>=2.31.0
 
 # Development and testing (optional)
 pytest>=7.0.0
 black>=23.0.0
 flake8>=6.0.0
+
+# Text processing (optional - for advanced features)
+# textblob>=0.17.0
+# nltk>=3.8.0

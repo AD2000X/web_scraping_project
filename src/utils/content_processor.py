@@ -74,12 +74,12 @@ class ContentProcessor:
         return '\n\n'.join(cleaned_paragraphs)
     
     @staticmethod
-    def extract_tags(content: str, crawl_result: Any) -> List[str]:
+    def extract_tags(content: str, crawl_result: Any = None) -> List[str]:
         """Extract relevant tags from content and metadata"""
         tags = set()
         
-        # Extract from metadata keywords
-        if hasattr(crawl_result, 'metadata') and crawl_result.metadata:
+        # Extract from metadata keywords if available
+        if crawl_result and hasattr(crawl_result, 'metadata') and crawl_result.metadata:
             meta_keywords = crawl_result.metadata.get('keywords', '')
             if meta_keywords:
                 tags.update(tag.strip() for tag in meta_keywords.split(','))
@@ -90,7 +90,8 @@ class ContentProcessor:
             tech_keywords = [
                 'artificial intelligence', 'ai', 'machine learning', 'blockchain',
                 'cryptocurrency', 'cybersecurity', 'data privacy', 'cloud computing',
-                'software', 'hardware', 'startup', 'innovation', 'digital transformation'
+                'software', 'hardware', 'startup', 'innovation', 'digital transformation',
+                'automation', 'robotics', 'internet of things', 'iot', '5g'
             ]
             
             content_lower = content.lower()

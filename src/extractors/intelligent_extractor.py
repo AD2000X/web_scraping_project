@@ -3,6 +3,7 @@ Advanced data extraction engine
 """
 
 import json
+import logging
 from typing import Dict, Any
 from urllib.parse import urlparse
 from crawl4ai import AsyncWebCrawler, CacheMode, CrawlerRunConfig
@@ -10,7 +11,7 @@ from crawl4ai.extraction_strategy import (
     JsonCssExtractionStrategy, 
     CosineStrategy
 )
-from src.extractors.selector_intelligence import SelectorIntelligence
+from .selector_intelligence import SelectorIntelligence
 
 
 class IntelligentExtractor:
@@ -20,6 +21,7 @@ class IntelligentExtractor:
     
     def __init__(self):
         self.selector_intelligence = SelectorIntelligence()
+        self.logger = logging.getLogger(__name__)
     
     def create_adaptive_schema(self, url: str) -> Dict[str, Any]:
         """Create adaptive extraction schema based on URL analysis"""
@@ -102,9 +104,13 @@ class IntelligentExtractor:
         Focus on accuracy and completeness. If any information is not available, mark it as "Not Available".
         """
     
-    async def extract_with_multiple_strategies(self, url: str, crawler: AsyncWebCrawler) -> Dict[str, Any]:
+    async def extract_with_multiple_strategies(self, url: str, crawler: AsyncWebCrawler = None) -> Dict[str, Any]:
         """Use multiple extraction strategies and combine results"""
         results = {}
+        
+        # Create crawler if not provided
+        if crawler is None:
+            crawler = AsyncWebCrawler()
         
         # Strategy 1: CSS-based extraction
         try:
@@ -120,9 +126,10 @@ class IntelligentExtractor:
             if css_result.extracted_content:
                 results['css_extraction'] = json.loads(css_result.extracted_content)
         except Exception as e:
+            self.logger.error(f"CSS extraction failed: {e}")
             results['css_extraction'] = {'error': str(e)}
         
-        # Strategy 2: LLM-based extraction (if API key available)
+        # Strategy 2: LLM-based extraction (placeholder - requires API key)
         try:
             llm_prompt = self.create_llm_extraction_prompt(url)
             # Note: This would require an LLM API key
@@ -133,8 +140,9 @@ class IntelligentExtractor:
             # )
             # llm_result = await crawler.arun(url, extraction_strategy=llm_strategy)
             # results['llm_extraction'] = json.loads(llm_result.extracted_content)
-            results['llm_extraction'] = {'status': 'LLM API key required'}
+            results['llm_extraction'] = {'status': 'LLM API key required for advanced extraction'}
         except Exception as e:
+            self.logger.error(f"LLM extraction failed: {e}")
             results['llm_extraction'] = {'error': str(e)}
         
         # Strategy 3: Semantic clustering for content analysis
@@ -155,6 +163,7 @@ class IntelligentExtractor:
             if semantic_result.extracted_content:
                 results['semantic_extraction'] = json.loads(semantic_result.extracted_content)
         except Exception as e:
+            self.logger.error(f"Semantic extraction failed: {e}")
             results['semantic_extraction'] = {'error': str(e)}
         
         return results
