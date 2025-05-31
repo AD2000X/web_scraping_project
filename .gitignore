@@ -1,3 +1,16 @@
+# Python virtual environments
+web_scraping_env/
+venv/
+env/
+.env/
+.venv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
