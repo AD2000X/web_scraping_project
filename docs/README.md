@@ -2,6 +2,19 @@
 
 A production-ready web scraping system that demonstrates mastery of all web scraping fundamentals including HTTP protocol handling, dynamic content processing, anti-scraping countermeasures, and advanced data extraction strategies.
 
+```markdown
+## 🚀 Deployment
+
+### Quick Deployment to GitHub
+
+**Windows:**
+```cmd
+deploy_to_github.bat
+
+Linux/macOS:
+chmod +x deploy_to_github.sh
+./deploy_to_github.sh
+
 ## 🚀 Features
 
 - **Advanced HTTP Protocol Handling**: Smart header generation, user-agent rotation, and response analysis
