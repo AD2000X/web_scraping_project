@@ -1,4 +1,4 @@
-# Comprehensive Web Scraping Project
+# Web Scraping Project with crawl4ai
 
 A production-ready web scraping system that demonstrates mastery of all web scraping fundamentals including HTTP protocol handling, dynamic content processing, anti-scraping countermeasures, and advanced data extraction strategies.
 
