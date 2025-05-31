@@ -8,18 +8,24 @@ import logging
 import sys
 import os
 
+# Add the parent directory to Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# from news_intelligence_system import FixedNewsIntelligenceSystem
-from src.system.news_intelligence_system import NewsIntelligenceSystem
+# Apply nest_asyncio for Jupyter compatibility
+nest_asyncio.apply()
+
+# Fixed imports
+try:
+    from src.system.news_intelligence_system import NewsIntelligenceSystem
+except ImportError:
+    # Fallback for simpler import structure
+    from examples.simple_news_system import SimpleNewsSystem as NewsIntelligenceSystem
+
 from examples.demo_functions import (
     demonstrate_http_mastery,
     demonstrate_dynamic_content_handling,
     demonstrate_anti_scraping_intelligence
 )
-
-# Apply nest_asyncio for Jupyter compatibility
-nest_asyncio.apply()
 
 
 async def main():
@@ -37,16 +43,19 @@ async def main():
     print("="*80)
 
     # Run individual demonstrations
-    await demonstrate_http_mastery()
-    await demonstrate_dynamic_content_handling()
-    await demonstrate_anti_scraping_intelligence()
+    try:
+        await demonstrate_http_mastery()
+        await demonstrate_dynamic_content_handling()
+        await demonstrate_anti_scraping_intelligence()
+    except Exception as e:
+        print(f"Demo functions failed: {e}")
 
     # Main scraping demonstration
     print("\n🚀 MAIN SCRAPING DEMONSTRATION")
     print("="*60)
 
     # Initialize the news intelligence system
-    news_system = NewsIntelligenceSystem()  # ✅ 修正類名
+    news_system = NewsIntelligenceSystem()
 
     # Define target URLs that showcase different challenges
     demo_urls = [
