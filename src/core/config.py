@@ -5,8 +5,8 @@ Configuration settings for the web scraping system
 from typing import List, Dict
 
 
-class ScrapingConfig:
-    """Configuration class for scraping settings"""
+class Config:
+    """Main configuration class for scraping settings"""
     
     # Default news sources
     DEFAULT_NEWS_SOURCES: List[str] = [
@@ -80,3 +80,7 @@ class ScrapingConfig:
         'software', 'hardware', 'startup', 'innovation', 'digital transformation',
         'automation', 'robotics', 'internet of things', 'iot', '5g', 'quantum computing'
     ]
+
+
+# Create alias for backward compatibility
+ScrapingConfig = Config

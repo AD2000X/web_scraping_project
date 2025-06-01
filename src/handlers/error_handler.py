@@ -5,9 +5,11 @@ Robust error handling and retry mechanisms
 import asyncio
 import random
 import aiohttp
+import logging
+from typing import Any, Callable
 
 
-class RobustErrorHandler:
+class ErrorHandler:
     """
     Comprehensive error handling and retry mechanisms
     """
@@ -17,8 +19,9 @@ class RobustErrorHandler:
         self.base_delay = 1.0
         self.max_delay = 60.0
         self.backoff_factor = 2.0
+        self.logger = logging.getLogger(__name__)
     
-    async def execute_with_retry(self, operation, *args, **kwargs):
+    async def execute_with_retry(self, operation: Callable, *args, **kwargs) -> Any:
         """Execute operation with intelligent retry logic"""
         last_exception = None
         
@@ -32,7 +35,7 @@ class RobustErrorHandler:
                     delay = min(self.base_delay * (self.backoff_factor ** attempt), self.max_delay)
                     jitter = random.uniform(0.8, 1.2)
                     await asyncio.sleep(delay * jitter)
-                    print(f"🔄 Timeout retry {attempt + 1}/{self.max_retries}")
+                    self.logger.warning(f"Timeout retry {attempt + 1}/{self.max_retries}")
                 
             except aiohttp.ClientError as e:
                 last_exception = e
@@ -40,7 +43,7 @@ class RobustErrorHandler:
                     if attempt < self.max_retries:
                         delay = min(30 * (attempt + 1), 120)  # Longer delays for server issues
                         await asyncio.sleep(delay)
-                        print(f"🚫 Server error retry {attempt + 1}/{self.max_retries}")
+                        self.logger.warning(f"Server error retry {attempt + 1}/{self.max_retries}")
                     else:
                         break
                 else:
@@ -48,7 +51,11 @@ class RobustErrorHandler:
                 
             except Exception as e:
                 last_exception = e
-                print(f"❌ Unexpected error: {e}")
+                self.logger.error(f"Unexpected error: {e}")
                 break  # Don't retry unexpected errors
         
         raise last_exception
+
+
+# Create alias for backward compatibility
+RobustErrorHandler = ErrorHandler
